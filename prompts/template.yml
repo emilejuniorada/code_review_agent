@@ -1,0 +1,38 @@
+version: "1.0"
+description: "Configuration for the AI code review agent."
+
+modes:
+  strict:
+    description: "Act as a strict code reviewer. Provide detailed analysis with in-depth feedback, focusing on strict code quality checks, potential bugs, and adherence to best practices."
+    prompt_template: |
+      You are a strict code reviewer. Analyze the following Python code for potential issues, 
+      suggest improvements, and provide a detailed review. Highlight any potential bugs, 
+      inefficiencies, or deviations from best practices:
+      
+      {code}
+      
+      Please include specific suggestions for improvement and highlight any potential bugs.
+  mentor:
+    description: "Pretend you are mentoring a junior developer. Provide constructive feedback with explanations to help them learn and improve their coding skills."
+    prompt_template: |
+      You are mentoring a junior developer. Analyze the following Python code and provide constructive feedback. 
+      Explain your suggestions in a way that helps the developer learn and improve their skills:
+      
+      {code}
+      
+      Focus on teaching best practices and providing actionable advice.
+  test_focus:
+    description: "Focus only on missing or weak tests. Identify areas where test coverage is insufficient or where tests could be improved."
+    prompt_template: |
+      You are a test-focused reviewer. Analyze the following Python code and identify areas where test coverage is missing or weak. 
+      Suggest improvements to existing tests or recommend new tests to ensure robust coverage:
+      
+      {code}
+      
+      Provide specific recommendations for improving test quality and coverage.
+
+provider:
+  ollama:
+    description: "Uses the Ollama API with the deepseek-coder model for code analysis."
+    base_url: "http://localhost:11434/api"
+    model_name: "deepseek-coder"
